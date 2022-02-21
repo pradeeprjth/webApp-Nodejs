@@ -1,8 +1,18 @@
 const express = require('express');
-const path = require('path');
-
 const app = express();
 
+const reqFilter = (req,resp,next) => {
+   if(!req.query.age){
+      resp.send("Enter Your age first");
+   }else if(req.query.age < 18){
+      resp.send("Your age is not 18 yet");
+   }else{
+      console.log('Filter');
+      next();
+   }
+}
+
+app.use(reqFilter);
 app.set('view engine', 'ejs');
 
 app.get('/',(_,resp)=>{
