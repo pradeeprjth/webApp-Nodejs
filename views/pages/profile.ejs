@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <%- include('../common/head'); %>
+</head>
+
+<body class="container">
+
+   <header>
+      <%- include('../common/header'); %>
+   </header>
+
+   <main>
+      <div class="jumbotron">
+         <h1>This is great</h1>
+         <h4>Hello <%= user.name%>
+               </>
+               <h5>Your Email is <%= user.email%>
+               </h5>
+               <h6>You phone number is <%= user.phone%>
+               </h6>
+               <p>Your address is <%= user.address%>
+               </p>
+               <%user.skills.forEach((item)=>{%>
+                  <li>
+                     <%= item%>
+                  </li>
+                  <%})%>
+      </div>
+   </main>
+
+   <footer>
+      <%- include('../common/footer'); %>
+   </footer>
+
+</body>
+
+</html>
