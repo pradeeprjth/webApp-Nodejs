@@ -1,24 +1,18 @@
 const express = require('express');
+const reqFilter = require('./middleware')
 const app = express();
+const route = express.Router();
 
-const reqFilter = (req,resp,next) => {
-   if(!req.query.age){
-      resp.send("Enter Your age first");
-   }else if(req.query.age < 18){
-      resp.send("Your age is not 18 yet");
-   }else{
-      console.log('Filter');
-      next();
-   }
-}
 
-app.use(reqFilter);
+route.use(reqFilter);
+
 app.set('view engine', 'ejs');
 
-app.get('/',(_,resp)=>{
+app.get('/',(req,resp)=>{
    resp.render('pages/index');
 });
-app.get('/profile',(_,resp)=>{
+
+app.get('/profile',(req,resp)=>{
    const user ={
       name:'Pradeep',
       email:'pradeep.cotocus@gmail.com',
@@ -29,7 +23,8 @@ app.get('/profile',(_,resp)=>{
    resp.render('pages/profile',{user})
 })
 
-app.get('/login',(_,resp)=>{
+route.get('/login',(req,resp)=>{
    resp.render('pages/login');
 })
+
 app.listen(5000)
